@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../model/user.model';
+import User from '../model/user.model.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,6 +14,7 @@ const authJWT = async (req, res, next) => {
         req.user = await User.findById(decoded.id);
         if (!req.user) throw new Error('User not found');
         next();
+        
     } catch (error) {
         res.status(401).json({ message: 'Invalid or expired token' });
     }
@@ -27,4 +28,4 @@ const authRoles = (...roles) => (req, res, next) => {
 };
 
 
-export default {authJWT, authRoles}
+export {authJWT, authRoles}
