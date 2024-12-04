@@ -1,10 +1,12 @@
 import jwt from 'jsonwebtoken';
 import User from '../model/user.model';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 
 const authJWT = async (req, res, next) => {
-    const token = req.header('Authorization')?.split(' ')[1]; // Bearer <token>
+    const token = req.header('Authorization')?.split(' ')[1]; 
     if (!token) return res.status(401).json({ message: 'Unauthorized' });
 
     try {
